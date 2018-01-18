@@ -2,25 +2,27 @@ import React, {Component} from 'react';
 import {View, Alert, Text} from 'react-native';
 
 import { connect } from 'react-redux';
-import { NavigationActions } from 'react-navigation';
 
 import {Spinner} from './common/spinner';
-import { loginUserAsync } from '../actions';
+import { getMyRepos } from '../actions';
 
 class ContributedRepoScreen extends Component {
+
+    componentDidMount() {
+        this.props.fetchMyRepos();
+    }
 
     render() {
 
         const {
-            authenticated,
-            loading,
-            loginUserAsync,
-            loginErrorMsg
+            getMyRepos,
+            githubDisplayName,
+            githubLoginName
           } = this.props;
 
         return (
             <View>
-                <Text>Hi From contributed Repo</Text>
+                <Text>Hi From contributed Repo - {githubLoginName} - {githubDisplayName}</Text>
             </View>
         );
     }
@@ -31,8 +33,8 @@ const mapStateToProps = state => ({
   });
   
   const mapDispatchToProps = dispatch => ({
-    loginUser: (username, password) =>
-      dispatch(loginUserAsync(username, password)),
+    fetchMyRepos: () =>
+      dispatch(getMyRepos()),
   });
   
 export default connect(mapStateToProps, mapDispatchToProps)(ContributedRepoScreen);

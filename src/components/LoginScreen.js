@@ -1,34 +1,43 @@
 import React, {Component} from 'react';
-import {View, Alert, Text, Button} from 'react-native';
+import {View, Alert, Text} from 'react-native';
 
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
-import {Spinner} from './common/spinner';
-import { loginUserAsync } from '../actions';
+import {Spinner, Button, Card, CardSection} from './common';
+import { loginWithGithub } from '../actions';
 import { navigateTo } from '../GlobalNavigator';
 
 class LoginScreen extends Component {
 
-    skipLogin() {
-        navigateTo('Repo');
+    githubLoginButtonPressed() {
+        this.props.githubLogin();
+    }
+
+    renderLoginButton() {
+        if (this.props.inProgress) {
+            return <Spinner size='large' />;
+        }
+        return (
+            <Button onPress={this.githubLoginButtonPressed.bind(this)}>Login with Github</Button>     
+        );
     }
 
     render() {
 
         const {
             authenticated,
-            loading,
-            loginUserAsync,
+            inProgress,
+            loginWithGithub,
             loginErrorMsg
           } = this.props;
 
         return (
-            <View>
-                <Text>Hi From Login</Text>
-
-                <Button title="Skip Login" onPress={this.skipLogin.bind(this)}/>
-            </View>
+            <Card>
+                <CardSection>
+                    {this.renderLoginButton()}
+                </CardSection>
+            </Card>
         );
     }
 }
@@ -38,8 +47,8 @@ const mapStateToProps = state => ({
   });
   
   const mapDispatchToProps = dispatch => ({
-    loginUser: (username, password) =>
-      dispatch(loginUserAsync(username, password)),
+    githubLogin: () =>
+      dispatch(loginWithGithub())
   });
   
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
