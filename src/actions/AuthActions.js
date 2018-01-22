@@ -62,7 +62,8 @@ export const logoutFromGithub = () => {
                     type: LOGOUT_USER_SUCCESS,
                     payload: resp.data
                 });
-                manager = OauthManagerService.sharedInstance.destroyManager();
+                // Fixme, destroy manager on logout
+                //manager = OauthManagerService.sharedInstance.destroyManager();
                 navigationResetTo('Login');
             })
             .catch(function(resp) { 
