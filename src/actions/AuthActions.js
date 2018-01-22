@@ -1,5 +1,5 @@
 import { navigationResetTo } from '../GlobalNavigator';
-import OAuthManager from 'react-native-oauth';
+import OauthManagerSingleton from '../OauthManagerSingleton'
 
 import {
     LOGIN_USER,
@@ -18,21 +18,10 @@ import {
     FETCH_ISSUE_DETAIL
 } from './types';
 
-const config =  {
-    github: {
-        client_id: 'fd400247e064699b4703',
-        client_secret: '8b93e0327bb5210e02b68de04b3a3ab777ddc1c0',
-        callback_url: 'http://localhost/github'
-    }
-};
 
-let manager;
+const manager = OauthManagerSingleton.sharedInstance.getManager();
 
 export const loginWithGithub = () => {
-    console.log(manager);
-    manager = new OAuthManager('RepoBrowserApp-Android'); 
-    manager.configure(config);
-    console.log(manager);
     return (dispatch) => {
         dispatch({ 
             type: LOGIN_USER
@@ -73,10 +62,7 @@ export const logoutFromGithub = () => {
                     type: LOGOUT_USER_SUCCESS,
                     payload: resp.data
                 });
-                console.log(resp);
-                console.log(manager);
-                Object.assign(manager, {});
-                console.log(manager);
+                manager = OauthManagerService.sharedInstance.destroyManager();
                 navigationResetTo('Login');
             })
             .catch(function(resp) { 
