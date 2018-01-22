@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {View, Alert, Text} from 'react-native';
+import {FlatList, View, Alert, Text} from 'react-native';
 
 import { connect } from 'react-redux';
-
-import {Spinner} from './common/spinner';
+import {Spinner, ListItem, Button, Card, CardSection} from './common';
 import { getMyRepos } from '../actions';
 
 class ContributedRepoScreen extends Component {
@@ -11,19 +10,52 @@ class ContributedRepoScreen extends Component {
     componentDidMount() {
         this.props.fetchMyRepos();
     }
-
+    renderRow(item) {
+        return <ListItem 
+                item={item}
+                gotoItemDetail={this.gotoItemDetail.bind(this)}/>
+    }
+    filterContributedRepo(item){
+        return item.owner.login != this.props.githubLoginName;
+    }
+    gotoItemDetail(item) {
+        console.log(item);
+    }
+    renderContributedRepoList() {
+        if (this.props.inProgress) {
+            return <Spinner size='large' />;
+        }
+        return (
+            <FlatList
+                data={this.props.allRepos.filter(this.filterContributedRepo, this)}
+                renderItem={({item}) => this.renderRow(item)}
+                keyExtractor={item => item.id}
+            />
+        );
+    }
     render() {
 
         const {
             getMyRepos,
+            allRepos,
             githubDisplayName,
-            githubLoginName
+            githubLoginName,
+            logoutFromGithub
           } = this.props;
 
         return (
             <View>
-                <Text>Hi From contributed Repo - {githubLoginName} - {githubDisplayName}</Text>
+                <Text style={{textAlign: 'right'}}>{githubDisplayName} | Log out</Text>
+                <Card>
+                    {/* <CardSection>
+                        <Button onPress={this.logoutButtonPressed.bind(this)}>Logout</Button>
+                    </CardSection> */}
+                    <CardSection>
+                        {this.renderContributedRepoList()}
+                    </CardSection>
+                </Card>
             </View>
+            
         );
     }
 }

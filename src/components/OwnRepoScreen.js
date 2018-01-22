@@ -17,7 +17,9 @@ class OwnRepoScreen extends Component {
                 item={item}
                 gotoItemDetail={this.gotoItemDetail.bind(this)}/>
     }
-
+    filterOwnRepo(item){
+        return item.owner.login == this.props.githubLoginName;
+    }
     gotoItemDetail(item) {
         console.log(item);
     }
@@ -32,7 +34,7 @@ class OwnRepoScreen extends Component {
         }
         return (
             <FlatList
-                data={this.props.allRepos}
+                data={this.props.allRepos.filter(this.filterOwnRepo, this)}
                 renderItem={({item}) => this.renderRow(item)}
                 keyExtractor={item => item.id}
             />
