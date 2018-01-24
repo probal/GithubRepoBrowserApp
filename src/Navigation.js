@@ -4,19 +4,22 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import LoginScreen from './components/LoginScreen';
 import OwnRepoScreen from './components/OwnRepoScreen';
 import ContributedRepoScreen from './components/ContributedRepoScreen';
+import LogoutComponent from './components/LogoutComponent';
 
 const RepoScreen = TabNavigator({
   OwnRepo: {
     screen: OwnRepoScreen,
     navigationOptions: {
-      headerTitle: 'My Repos',
-    },
+      headerRight: <LogoutComponent />,
+      headerTitle: 'My Repos'
+    }
   },
   Contributions: {
     screen: ContributedRepoScreen,
     navigationOptions: {
-      headerTitle: 'My Contributions',
-    },
+      headerRight: <LogoutComponent />,
+      headerTitle: 'My Contributions'
+    }
   },
 });
 
