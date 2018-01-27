@@ -20,6 +20,7 @@ class ContributedRepoScreen extends Component {
     }
     gotoItemDetail(item) {
         console.log(item);
+        navigateTo('Issue', {item});
     }
     renderContributedRepoList() {
         if (this.props.inProgress) {
@@ -45,7 +46,6 @@ class ContributedRepoScreen extends Component {
 
         return (
             <View>
-                <Text style={{textAlign: 'right'}}>{githubDisplayName} | Log out</Text>
                 <Card>
                     {/* <CardSection>
                         <Button onPress={this.logoutButtonPressed.bind(this)}>Logout</Button>

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import {Spinner, ListItem, Button, Card, CardSection} from './common';
 import { getMyRepos, logoutFromGithub } from '../actions';
-import {navigateTo} from "../GlobalNavigator";
+import {navigateTo, navigationResetTo} from "../GlobalNavigator";
 
 class OwnRepoScreen extends Component {
 
@@ -23,7 +23,7 @@ class OwnRepoScreen extends Component {
     }
     gotoItemDetail(item) {
         console.log(item);
-        navigateTo('Issue');
+        navigateTo('Issue', {item});
     }
 
     logoutButtonPressed() {
@@ -50,12 +50,11 @@ class OwnRepoScreen extends Component {
             allRepos,
             githubDisplayName,
             githubLoginName,
-            logoutFromGithub
+            logoutFromGithub,
           } = this.props;
 
         return (
             <View>
-                <Text style={{textAlign: 'right'}}>{githubDisplayName} | Log out</Text>
                 <Card>
                     {/* <CardSection>
                         <Button onPress={this.logoutButtonPressed.bind(this)}>Logout</Button>
