@@ -19,7 +19,7 @@ class LoginScreen extends Component {
             return <Spinner size='large' />;
         }
         return (
-            <Button onPress={this.githubLoginButtonPressed.bind(this)}>Login with Github</Button>     
+            <Button onPress={this.githubLoginButtonPressed.bind(this)}>Login with Github</Button>
         );
     }
 
@@ -45,10 +45,10 @@ class LoginScreen extends Component {
 const mapStateToProps = state => ({
     ...state.auth,
   });
-  
+
   const mapDispatchToProps = dispatch => ({
     githubLogin: () =>
       dispatch(loginWithGithub())
   });
-  
+
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

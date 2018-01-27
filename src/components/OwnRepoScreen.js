@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import {Spinner, ListItem, Button, Card, CardSection} from './common';
 import { getMyRepos, logoutFromGithub } from '../actions';
+import {navigateTo} from "../GlobalNavigator";
 
 class OwnRepoScreen extends Component {
 
@@ -22,10 +23,11 @@ class OwnRepoScreen extends Component {
     }
     gotoItemDetail(item) {
         console.log(item);
+        navigateTo('Issue');
     }
 
     logoutButtonPressed() {
-        this.props.logoutGithub()
+        this.props.logoutGithub();
     }
 
     renderOwnRepoList() {

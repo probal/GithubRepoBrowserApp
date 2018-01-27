@@ -13,4 +13,7 @@ export const FETCH_REPO_SUCCESS     = 'fetch_repo_success';
 export const FETCH_REPO_FAIL        = 'fetch_repo_fail';
 
 export const FETCH_REPO_ISSUES      = 'fetch_repo_issues';
+export const FETCH_ISSUES_SUCCESS   = 'fetch_issue_success';
+export const FETCH_ISSUES_FAIL      = 'fetch_issue_fail';
+
 export const FETCH_ISSUE_DETAIL     = 'fetch_issue_detail';

@@ -5,6 +5,8 @@ import LoginScreen from './components/LoginScreen';
 import OwnRepoScreen from './components/OwnRepoScreen';
 import ContributedRepoScreen from './components/ContributedRepoScreen';
 import LogoutComponent from './components/LogoutComponent';
+import IssueListingScreen from './components/IssueListingScreen';
+
 
 const RepoScreen = TabNavigator({
   OwnRepo: {
@@ -23,6 +25,12 @@ const RepoScreen = TabNavigator({
   },
 });
 
+const IssueScreen = StackNavigator({
+    IssueList: {
+      screen: IssueListingScreen
+    }
+});
+
 const RootNavigator = StackNavigator({
   Login: {
     screen: LoginScreen,
@@ -32,6 +40,9 @@ const RootNavigator = StackNavigator({
   },
   Repo: {
     screen: RepoScreen
+  },
+  Issue: {
+    screen: IssueScreen
   }
 });
 

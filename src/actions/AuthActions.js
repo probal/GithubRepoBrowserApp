@@ -1,4 +1,4 @@
-import { navigationResetTo } from '../GlobalNavigator';
+import {navigateTo, navigationResetTo} from '../GlobalNavigator';
 import OauthManagerSingleton from '../OauthManagerSingleton'
 
 import {
@@ -15,7 +15,7 @@ import {
     FETCH_REPO_FAIL,
 
     FETCH_REPO_ISSUES,
-    FETCH_ISSUE_DETAIL
+    FETCH_ISSUE_DETAIL, FETCH_ISSUES_SUCCESS, FETCH_ISSUES_FAIL
 } from './types';
 
 
@@ -99,12 +99,20 @@ export const getRepoIssues = (repoIssueUrl) => {
     return (dispatch) => {
         dispatch({ type: FETCH_REPO_ISSUES });
         manager.makeRequest('github', repoIssueUrl)
-            .then(resp => 
-                console.log(resp.data)
-            )
-            .catch(err => 
-                console.log(err)
-            );
+            .then(function(resp) {
+                console.log(resp);
+                dispatch({
+                    type: FETCH_ISSUES_SUCCESS,
+                    payload: resp.data
+                });
+                // navigateTo('Issue');
+            })
+            .catch(function(err) {
+                console.log(err);
+                dispatch({
+                    type: FETCH_ISSUES_FAIL
+                });
+            });
     };
 };
 
