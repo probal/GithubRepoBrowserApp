@@ -25,12 +25,6 @@ const RepoScreen = TabNavigator({
   },
 });
 
-const IssueScreen = StackNavigator({
-    IssueList: {
-      screen: IssueListingScreen
-    }
-});
-
 const RootNavigator = StackNavigator({
   Login: {
     screen: LoginScreen,
@@ -42,7 +36,11 @@ const RootNavigator = StackNavigator({
     screen: RepoScreen
   },
   Issue: {
-    screen: IssueScreen
+    screen: IssueListingScreen,
+    navigationOptions: {
+        headerRight: <LogoutComponent />,
+        headerTitle: 'Issue List'
+    }
   }
 });
 
