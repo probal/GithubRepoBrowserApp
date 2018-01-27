@@ -74,6 +74,7 @@ export default (state = INITIAL_STATE, action) => {
             
         case FETCH_REPO_ISSUES:
             return Object.assign({}, state, {
+                inProgress: true,
                 allRepoIssues: action.payload
             });
 

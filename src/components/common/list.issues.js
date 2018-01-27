@@ -9,7 +9,7 @@ class IssueListItem extends Component {
     }
 
     render() {
-        const { id, name, age } = this.props.item;
+        const { id, title, state } = this.props.item;
 
         return (
             <TouchableWithoutFeedback onPress={this.gotoIssueDetail.bind(this)}>
@@ -17,10 +17,10 @@ class IssueListItem extends Component {
                     <CardSection>
                         <View style={styles.viewStyle}>
                             <Text style={styles.titleStyle}>
-                                'Name'
+                                {title}
                             </Text>
                             <Text style={styles.subTitleStyle}>
-                                'Age'
+                                {state}
                             </Text>
                         </View>
                     </CardSection>

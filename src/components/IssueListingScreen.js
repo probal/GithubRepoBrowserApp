@@ -1,22 +1,22 @@
 import React, {Component} from 'react';
-import {FlatList, View, Alert, Text} from 'react-native';
+import {FlatList, View} from 'react-native';
 
-import { connect } from 'react-redux';
-import { NavigationActions } from 'react-navigation';
+import {connect} from 'react-redux';
 
-import {Spinner, ListItem, Button, Card, CardSection} from './common';
-import { getRepoIssues, logoutFromGithub } from '../actions';
-import { navigateTo } from '../GlobalNavigator';
+import {Card, CardSection, Spinner} from './common';
+import {getRepoIssues} from '../actions';
+import {IssueListItem} from "./common/list.issues";
 
 
 class IssueListingScreen extends Component {
 
     componentDidMount() {
-        this.props.fetchMyIssues("https://api.github.com/repos/mehdihasan/android_background_video/issues/50");
+        let url = this.props.navigation.state.params.item.issues_url.split('{')[0];
+        this.props.fetchMyIssues(url);
     }
 
     logoutButtonPressed() {
-        this.props.logoutGithub()
+        this.props.logoutGithub();
     }
 
     gotoIssueDetail(item) {
@@ -24,9 +24,9 @@ class IssueListingScreen extends Component {
     }
 
     renderRow(item) {
-        return <ListItem
+        return <IssueListItem
             item={item}
-            gotoItemDetail={this.gotoIssueDetail.bind(this)}/>
+            gotoIssueDetail={this.gotoIssueDetail.bind(this)}/>
     }
 
     renderIssueList() {
@@ -44,17 +44,14 @@ class IssueListingScreen extends Component {
 
     render() {
         const {
-            getMyRepos,
-            allRepos,
             allRepoIssues,
             githubDisplayName,
             githubLoginName,
-            logoutFromGithub
+            logoutFromGithub,
         } = this.props;
 
         return (
             <View>
-                <Text style={{textAlign: 'right'}}>{githubDisplayName} | Log out</Text>
                 <Card>
                     <CardSection>
                         {this.renderIssueList()}
