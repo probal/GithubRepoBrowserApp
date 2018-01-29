@@ -4,43 +4,34 @@ import {FlatList, View} from 'react-native';
 import {connect} from 'react-redux';
 
 import {Card, CardSection, Spinner} from './common';
-import {getRepoIssues} from '../actions';
 import {getIssuesDetail} from '../actions';
-import {IssueListItem} from "./common/list.issues";
-import {navigateTo, navigationResetTo} from "../GlobalNavigator";
 
+import {IssueDetailItem} from "./common/list.detail";
 
-class IssueListingScreen extends Component {
+class IssueDetailsScreen extends Component {
 
     componentDidMount() {
-        console.log("inssuelist: " + this.props.navigation.state.params.item.issues_url);
-        let url = this.props.navigation.state.params.item.issues_url.split('{')[0];
-        console.log("spliturl: " + url);
-        this.props.fetchMyIssues(url);
+        // const { comments_url } = item;
+        let url = this.props.navigation.state.params.item.comments_url
+        console.log("detailsURL: " + url);
+        this.props.fetchIssueDetails(url);
     }
 
     logoutButtonPressed() {
         this.props.logoutGithub();
     }
 
-    gotoIssueDetail(item) {
-        console.log(item);
-        navigateTo('IssueDetail', {item});
-    }
-
     renderRow(item) {
-        return <IssueListItem
-            item={item}
-            gotoIssueDetail={this.gotoIssueDetail.bind(this)}/>
+        return <IssueDetailItem item = {item} />
     }
 
-    renderIssueList() {
+    renderIssueDetails() {
         if (this.props.inProgress) {
             return <Spinner size='large' />;
         }
         return (
             <FlatList
-                data={this.props.allRepoIssues}
+                data={this.props.issueDetail}
                 renderItem={({item}) => this.renderRow(item)}
                 keyExtractor={item => item.id}
             />
@@ -49,7 +40,7 @@ class IssueListingScreen extends Component {
 
     render() {
         const {
-            allRepoIssues,
+            issueDetail,
             githubDisplayName,
             githubLoginName,
             logoutFromGithub,
@@ -59,7 +50,7 @@ class IssueListingScreen extends Component {
             <View>
                 <Card>
                     <CardSection>
-                        {this.renderIssueList()}
+                        {this.renderIssueDetails()}
                     </CardSection>
                 </Card>
             </View>
@@ -72,10 +63,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    fetchMyIssues: (url) =>
-        dispatch(getRepoIssues(url)),
     fetchIssueDetails: (url) =>
       dispatch(getIssuesDetail(url))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(IssueListingScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(IssueDetailsScreen);

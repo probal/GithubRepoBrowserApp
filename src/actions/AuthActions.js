@@ -15,7 +15,12 @@ import {
     FETCH_REPO_FAIL,
 
     FETCH_REPO_ISSUES,
-    FETCH_ISSUE_DETAIL, FETCH_ISSUES_SUCCESS, FETCH_ISSUES_FAIL
+    FETCH_ISSUES_SUCCESS, 
+    FETCH_ISSUES_FAIL,
+
+    FETCH_ISSUE_DETAIL,
+    FETCH_ISSUE_DETAIL_SUCCESS, 
+    FETCH_ISSUE_DETAIL_FAIL
 } from './types';
 
 
@@ -120,11 +125,19 @@ export const getIssuesDetail = (issueDetailUrl) => {
     return (dispatch) => {
         dispatch({ type: FETCH_ISSUE_DETAIL });
         manager.makeRequest('github', issueDetailUrl)
-            .then(resp => 
-                console.log(resp.data)
-            )
-            .catch(err => 
-                console.log(err)
-            );
+            .then(function(resp) {
+                console.log(resp);
+                dispatch({
+                    type: FETCH_ISSUE_DETAIL_SUCCESS,
+                    payload: resp.data
+                });
+                // navigateTo('IssueDetail');
+            })
+            .catch(function(err) {
+                console.log(err);
+                dispatch({
+                    type: FETCH_ISSUE_DETAIL_FAIL
+                });
+            });
     };
 };

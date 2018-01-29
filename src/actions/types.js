@@ -17,3 +17,5 @@ export const FETCH_ISSUES_SUCCESS   = 'fetch_issue_success';
 export const FETCH_ISSUES_FAIL      = 'fetch_issue_fail';
 
 export const FETCH_ISSUE_DETAIL     = 'fetch_issue_detail';
+export const FETCH_ISSUE_DETAIL_SUCCESS = 'fetch_issue_detail_success';
+export const FETCH_ISSUE_DETAIL_FAIL = 'fetch_issue_detail_fail';

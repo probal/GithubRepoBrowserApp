@@ -6,6 +6,7 @@ import OwnRepoScreen from './components/OwnRepoScreen';
 import ContributedRepoScreen from './components/ContributedRepoScreen';
 import LogoutComponent from './components/LogoutComponent';
 import IssueListingScreen from './components/IssueListingScreen';
+import IssueDetailsScreen from './components/IssueDetail'
 
 
 const RepoScreen = TabNavigator({
@@ -40,6 +41,13 @@ const RootNavigator = StackNavigator({
     navigationOptions: {
         headerRight: <LogoutComponent />,
         headerTitle: 'Issue List'
+    }
+  },
+  IssueDetail: {
+    screen: IssueDetailsScreen,
+    navigationOptions: {
+        headerRight: <LogoutComponent />,
+        headerTitle: 'Issue Detail'
     }
   }
 });
