@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {FlatList, View, Alert, Text} from 'react-native';
+import React, { Component } from 'react';
+import { FlatList, View, Alert, Text } from 'react-native';
 
 import { connect } from 'react-redux';
-import {Spinner, ListItem, Button, Card, CardSection} from './common';
+import { Spinner, ContributredListItem, Button, Card, CardSection } from './common';
 import { getMyRepos } from '../actions';
 
 class ContributedRepoScreen extends Component {
@@ -11,11 +11,12 @@ class ContributedRepoScreen extends Component {
         this.props.fetchMyRepos();
     }
     renderRow(item) {
-        return <ListItem 
-                item={item}
-                gotoItemDetail={this.gotoItemDetail.bind(this)}/>
+        return <ContributredListItem
+            item={item}
+            gotoItemDetail={this.gotoItemDetail.bind(this)}
+            githubLoginName={this.props.githubLoginName} />
     }
-    filterContributedRepo(item){
+    filterContributedRepo(item) {
         return item.owner.login != this.props.githubLoginName;
     }
     gotoItemDetail(item) {
@@ -28,7 +29,7 @@ class ContributedRepoScreen extends Component {
         return (
             <FlatList
                 data={this.props.allRepos.filter(this.filterContributedRepo, this)}
-                renderItem={({item}) => this.renderRow(item)}
+                renderItem={({ item }) => this.renderRow(item)}
                 keyExtractor={item => item.id}
             />
         );
@@ -45,28 +46,24 @@ class ContributedRepoScreen extends Component {
 
         return (
             <View>
-                <Text style={{textAlign: 'right'}}>{githubDisplayName} | Log out</Text>
                 <Card>
-                    {/* <CardSection>
-                        <Button onPress={this.logoutButtonPressed.bind(this)}>Logout</Button>
-                    </CardSection> */}
                     <CardSection>
                         {this.renderContributedRepoList()}
                     </CardSection>
                 </Card>
             </View>
-            
+
         );
     }
 }
 
 const mapStateToProps = state => ({
     ...state.auth,
-  });
-  
-  const mapDispatchToProps = dispatch => ({
+});
+
+const mapDispatchToProps = dispatch => ({
     fetchMyRepos: () =>
-      dispatch(getMyRepos()),
-  });
-  
+        dispatch(getMyRepos()),
+});
+
 export default connect(mapStateToProps, mapDispatchToProps)(ContributedRepoScreen);

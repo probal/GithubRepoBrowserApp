@@ -53,11 +53,7 @@ class OwnRepoScreen extends Component {
 
         return (
             <View>
-                <Text style={{textAlign: 'right'}}>{githubDisplayName} | Log out</Text>
                 <Card>
-                    {/* <CardSection>
-                        <Button onPress={this.logoutButtonPressed.bind(this)}>Logout</Button>
-                    </CardSection> */}
                     <CardSection>
                         {this.renderOwnRepoList()}
                     </CardSection>

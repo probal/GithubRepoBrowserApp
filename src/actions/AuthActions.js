@@ -23,10 +23,10 @@ const manager = OauthManagerSingleton.sharedInstance.getManager();
 
 export const loginWithGithub = () => {
     return (dispatch) => {
-        dispatch({ 
+        dispatch({
             type: LOGIN_USER
         });
-        manager.authorize('github', {scopes: 'user,repo'})
+        manager.authorize('github', { scopes: 'user,repo' })
             .then(resp => loginUserSuccess(dispatch, resp))
             .catch(err => loginUserFail(dispatch, err));
     };
@@ -39,8 +39,8 @@ const loginUserFail = (dispatch, err) => {
 
 const loginUserSuccess = (dispatch, resp) => {
     console.log(resp);
-    manager.makeRequest('github', '/user') 
-        .then(function(resp) { 
+    manager.makeRequest('github', '/user')
+        .then(function (resp) {
             dispatch({
                 type: LOGIN_USER_SUCCESS,
                 payload: resp.data
@@ -53,11 +53,11 @@ const loginUserSuccess = (dispatch, resp) => {
 
 export const logoutFromGithub = () => {
     return (dispatch) => {
-        dispatch({ 
+        dispatch({
             type: LOGOUT_USER
         });
         manager.deauthorize('github')
-            .then(function(resp) { 
+            .then(function (resp) {
                 dispatch({
                     type: LOGOUT_USER_SUCCESS,
                     payload: resp.data
@@ -66,7 +66,7 @@ export const logoutFromGithub = () => {
                 //manager = OauthManagerService.sharedInstance.destroyManager();
                 navigationResetTo('Login');
             })
-            .catch(function(resp) { 
+            .catch(function (resp) {
                 dispatch({
                     type: LOGOUT_USER_FAIL
                 });
@@ -76,18 +76,18 @@ export const logoutFromGithub = () => {
 
 export const getMyRepos = () => {
     return (dispatch) => {
-        dispatch({ 
+        dispatch({
             type: FETCH_REPO
         });
         manager.makeRequest('github', '/user/repos')
-            .then(function(resp) {
+            .then(function (resp) {
                 console.log(resp);
                 dispatch({
                     type: FETCH_REPO_SUCCESS,
                     payload: resp.data
-                }); 
+                });
             })
-            .catch(function(err) {
+            .catch(function (err) {
                 dispatch({
                     type: FETCH_REPO_FAIL
                 });
@@ -99,10 +99,10 @@ export const getRepoIssues = (repoIssueUrl) => {
     return (dispatch) => {
         dispatch({ type: FETCH_REPO_ISSUES });
         manager.makeRequest('github', repoIssueUrl)
-            .then(resp => 
+            .then(resp =>
                 console.log(resp.data)
             )
-            .catch(err => 
+            .catch(err =>
                 console.log(err)
             );
     };
@@ -112,10 +112,10 @@ export const getIssuesDetail = (issueDetailUrl) => {
     return (dispatch) => {
         dispatch({ type: FETCH_ISSUE_DETAIL });
         manager.makeRequest('github', issueDetailUrl)
-            .then(resp => 
+            .then(resp =>
                 console.log(resp.data)
             )
-            .catch(err => 
+            .catch(err =>
                 console.log(err)
             );
     };
