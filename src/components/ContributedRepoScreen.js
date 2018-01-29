@@ -4,6 +4,7 @@ import { FlatList, View, Alert, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Spinner, ContributredListItem, Button, Card, CardSection } from './common';
 import { getMyRepos } from '../actions';
+import {navigateTo, navigationResetTo} from "../GlobalNavigator";
 
 class ContributedRepoScreen extends Component {
 
@@ -21,6 +22,7 @@ class ContributedRepoScreen extends Component {
     }
     gotoItemDetail(item) {
         console.log(item);
+        navigateTo('Issue', {item});
     }
     renderContributedRepoList() {
         if (this.props.inProgress) {

@@ -1,6 +1,6 @@
-import { 
+import {
     LOGIN_USER,
-    LOGIN_USER_SUCCESS, 
+    LOGIN_USER_SUCCESS,
     LOGIN_USER_FAIL,
 
     LOGOUT_USER,
@@ -12,7 +12,12 @@ import {
     FETCH_REPO_FAIL,
 
     FETCH_REPO_ISSUES,
-    FETCH_ISSUE_DETAIL
+    FETCH_ISSUES_SUCCESS, 
+    FETCH_ISSUES_FAIL,
+    
+    FETCH_ISSUE_DETAIL, 
+    FETCH_ISSUE_DETAIL_SUCCESS, 
+    FETCH_ISSUE_DETAIL_FAIL
 } from '../actions/types';
 
 const INITIAL_STATE = { 
@@ -74,12 +79,40 @@ export default (state = INITIAL_STATE, action) => {
             
         case FETCH_REPO_ISSUES:
             return Object.assign({}, state, {
+                inProgress: true,
                 allRepoIssues: action.payload
+            });
+
+        case FETCH_ISSUES_SUCCESS:
+            return Object.assign({}, state, {
+                inProgress: false,
+                repoErrorMsg: '',
+                allRepoIssues: action.payload
+            });
+
+        case FETCH_ISSUES_FAIL:
+            return Object.assign({}, state, {
+                inProgress: false,
+                repoErrorMsg: 'Error in fetching issue list'
             });
            
         case FETCH_ISSUE_DETAIL:
             return Object.assign({}, state, {
+                inProgress: true,
                 issueDetail: action.payload
+            });
+
+        case FETCH_ISSUE_DETAIL_SUCCESS:
+        return Object.assign({}, state, {
+            inProgress: false,
+            repoErrorMsg: '',
+            issueDetail: action.payload
+        });
+
+        case FETCH_ISSUE_DETAIL_FAIL:
+            return Object.assign({}, state, {
+                inProgress: false,
+                repoErrorMsg: 'Error in fetching details'
             });
 
         case LOGOUT_USER:
