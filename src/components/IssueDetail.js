@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, View, Text} from 'react-native';
 
 import {connect} from 'react-redux';
 
@@ -11,7 +11,6 @@ import {IssueDetailItem} from "./common/list.detail";
 class IssueDetailsScreen extends Component {
 
     componentDidMount() {
-        // const { comments_url } = item;
         let url = this.props.navigation.state.params.item.comments_url
         console.log("detailsURL: " + url);
         this.props.fetchIssueDetails(url);
@@ -23,6 +22,18 @@ class IssueDetailsScreen extends Component {
 
     renderRow(item) {
         return <IssueDetailItem item = {item} />
+    }
+
+    renderIssueTitle(){
+        let item = this.props.navigation.state.params.item
+        let issueDisplayName = "#" + item.number + " " + item.title
+        return (
+            <View style={styles.viewStyle}>
+                <Text style={styles.titleStyle}>
+                    {issueDisplayName}
+                </Text>
+            </View>
+        );
     }
 
     renderIssueDetails() {
@@ -50,6 +61,9 @@ class IssueDetailsScreen extends Component {
             <View>
                 <Card>
                     <CardSection>
+                        {this.renderIssueTitle()}
+                    </CardSection>
+                    <CardSection>
                         {this.renderIssueDetails()}
                     </CardSection>
                 </Card>
@@ -57,6 +71,21 @@ class IssueDetailsScreen extends Component {
         );
     }
 }
+
+const styles = {
+    titleStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        fontSize: 25,
+        color: '#000000',
+        fontWeight: 'bold',
+        paddingLeft: 15
+    },
+    viewStyle: {
+        flex: 1,
+        flexDirection: 'row',
+    }
+};
 
 const mapStateToProps = state => ({
     ...state.auth,

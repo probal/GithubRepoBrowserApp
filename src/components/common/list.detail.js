@@ -29,14 +29,15 @@ const styles = {
     titleStyle: {
         flex: 1,
         flexDirection: 'column',
-        fontSize: 25,
+        fontSize: 20,
         fontWeight: 'bold',
         paddingLeft: 15
     },
     subTitleStyle: {
         flex: 1,
         flexDirection: 'column',
-        fontSize: 18,
+        color: '#000000',
+        fontSize: 13,
         paddingLeft: 15
     },
     viewStyle: {
