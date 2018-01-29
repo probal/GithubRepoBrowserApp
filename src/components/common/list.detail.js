@@ -25,7 +25,7 @@ class IssueDetailItem extends Component {
                                 {"Submitted by: " + user.login}
                             </Text>
                             <Text style={styles.timeStyle}>
-                                {Moment(created_at).format('hh:mm a MMM d, YYYY')}
+                                {Moment(created_at).format('hh:mm a MMM DD, YYYY')}
                             </Text>
                         </View>
                     </CardSection>

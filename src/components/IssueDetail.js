@@ -54,12 +54,12 @@ class IssueDetailsScreen extends Component {
                     </View>
                 </CardSection>
                 <CardSection>
-                <View style={styles.informationViewStyle}>
+                    <View style={styles.informationViewStyle}>
                         <Text style={styles.subTitleStyle}>
                             {"Submitted by: " + item.user.login}
                         </Text>
                         <Text style={styles.timeStyle}>
-                            {Moment(item.created_at).format('hh:mm a MMM d, YYYY')}
+                            {Moment(item.created_at).format('hh:mm a MMM DD, YYYY')}
                         </Text>
                     </View>
                 </CardSection>

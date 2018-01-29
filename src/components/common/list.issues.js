@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableWithoutFeedback, Alert } from 'react-native';
 import  {CardSection}  from '../common';
+import Moment from 'moment';
 
 class IssueListItem extends Component {
 
@@ -9,7 +10,7 @@ class IssueListItem extends Component {
     }
 
     render() {
-        const { id, title, state } = this.props.item;
+        const { id, title, state, number, created_at, user } = this.props.item;
 
         return (
             <TouchableWithoutFeedback onPress={this.gotoIssueDetail.bind(this)}>
@@ -17,10 +18,10 @@ class IssueListItem extends Component {
                     <CardSection>
                         <View style={styles.viewStyle}>
                             <Text style={styles.titleStyle}>
-                                {title}
+                                {"Issue #"+number+": "+title}
                             </Text>
                             <Text style={styles.subTitleStyle}>
-                                {state}
+                                {"Asked on "+Moment(created_at).format('hh:mm a DD/MM/YY')+" By: "+user.login}
                             </Text>
                         </View>
                     </CardSection>
@@ -36,7 +37,8 @@ const styles = {
         flexDirection: 'column',
         fontSize: 25,
         fontWeight: 'bold',
-        paddingLeft: 15
+        paddingLeft: 15,
+        color: '#000000',
     },
     subTitleStyle: {
         flex: 1,
