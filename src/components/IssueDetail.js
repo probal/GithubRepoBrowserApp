@@ -7,6 +7,7 @@ import {Card, CardSection, Spinner} from './common';
 import {getIssuesDetail} from '../actions';
 
 import {IssueDetailItem} from "./common/list.detail";
+import Moment from 'moment';
 
 class IssueDetailsScreen extends Component {
 
@@ -26,12 +27,42 @@ class IssueDetailsScreen extends Component {
 
     renderIssueTitle(){
         let item = this.props.navigation.state.params.item
-        let issueDisplayName = "#" + item.number + " " + item.title
+        let issueDisplayName = "Issue #" + item.number + " " + item.title
         return (
             <View style={styles.viewStyle}>
                 <Text style={styles.titleStyle}>
                     {issueDisplayName}
                 </Text>
+            </View>
+        );
+    }
+
+    renderIssueDescription(){
+        let item = this.props.navigation.state.params.item
+        let issueBody = item.body
+
+        if (issueBody === ""){
+            return null;
+        }
+        return (
+            <View>
+                <CardSection>
+                    <View style={styles.bodyViewStyle}>
+                        <Text style={styles.bodyTextStyle}>
+                            {issueBody}
+                        </Text>
+                    </View>
+                </CardSection>
+                <CardSection>
+                <View style={styles.informationViewStyle}>
+                        <Text style={styles.subTitleStyle}>
+                            {"Submitted by: " + item.user.login}
+                        </Text>
+                        <Text style={styles.timeStyle}>
+                            {Moment(item.created_at).format('hh:mm a MMM d, YYYY')}
+                        </Text>
+                    </View>
+                </CardSection>
             </View>
         );
     }
@@ -63,6 +94,7 @@ class IssueDetailsScreen extends Component {
                     <CardSection>
                         {this.renderIssueTitle()}
                     </CardSection>
+                    {this.renderIssueDescription()}
                     <CardSection>
                         {this.renderIssueDetails()}
                     </CardSection>
@@ -81,9 +113,35 @@ const styles = {
         fontWeight: 'bold',
         paddingLeft: 15
     },
+    bodyTextStyle: {
+        flex: 1,
+        flexDirection: 'column',
+        fontSize: 20,
+        fontWeight: 'bold',
+        paddingLeft: 10
+    },
     viewStyle: {
         flex: 1,
         flexDirection: 'row',
+    },
+    subTitleStyle: {
+        color: '#000000',
+        fontSize: 13,
+        paddingLeft: 10
+    },
+    timeStyle:{
+        color: '#000000',
+        fontSize: 13,
+        paddingRight: 10
+    },
+    bodyViewStyle: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    informationViewStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     }
 };
 

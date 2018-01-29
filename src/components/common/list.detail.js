@@ -1,25 +1,35 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
-import  {CardSection}  from '../common';
+import  { Card, CardSection}  from '../common';
+import Moment from 'moment';
 
 class IssueDetailItem extends Component {
 
     render() {
-        const { id, body, user } = this.props.item;
+        const { id, body, user, created_at } = this.props.item;
+        Moment.locale('en');
         
-
         return (
             <View>
-                <CardSection>
-                    <View style={styles.viewStyle}>
-                        <Text style={styles.titleStyle}>
-                            {body}
-                        </Text>
-                        <Text style={styles.subTitleStyle}>
-                            {user.login}
-                        </Text>
-                    </View>
-                </CardSection>
+                <Card>
+                    <CardSection>
+                        <View style={styles.bodyViewStyle}>
+                            <Text style={styles.titleStyle}>
+                                {body}
+                            </Text>
+                        </View>
+                    </CardSection>
+                    <CardSection>
+                    <View style={styles.informationViewStyle}>
+                            <Text style={styles.subTitleStyle}>
+                                {"Submitted by: " + user.login}
+                            </Text>
+                            <Text style={styles.timeStyle}>
+                                {Moment(created_at).format('hh:mm a MMM d, YYYY')}
+                            </Text>
+                        </View>
+                    </CardSection>
+                </Card>
             </View>
         );
     }
@@ -30,19 +40,27 @@ const styles = {
         flex: 1,
         flexDirection: 'column',
         fontSize: 20,
-        fontWeight: 'bold',
-        paddingLeft: 15
+        fontWeight: 'bold'
+        // paddingLeft: 15
     },
     subTitleStyle: {
-        flex: 1,
-        flexDirection: 'column',
         color: '#000000',
         fontSize: 13,
-        paddingLeft: 15
+        paddingLeft: 10
     },
-    viewStyle: {
+    timeStyle:{
+        color: '#000000',
+        fontSize: 13,
+        paddingRight: 10
+    },
+    bodyViewStyle: {
         flex: 1,
         flexDirection: 'column',
+    },
+    informationViewStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     }
 };
 export { IssueDetailItem };
