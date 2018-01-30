@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, View} from 'react-native';
+import {FlatList, View, Text} from 'react-native';
 
 import {connect} from 'react-redux';
 
@@ -13,9 +13,7 @@ import {navigateTo, navigationResetTo} from "../GlobalNavigator";
 class IssueListingScreen extends Component {
 
     componentDidMount() {
-        console.log("inssuelist: " + this.props.navigation.state.params.item.issues_url);
         let url = this.props.navigation.state.params.item.issues_url.split('{')[0];
-        console.log("spliturl: " + url);
         this.props.fetchMyIssues(url);
     }
 
@@ -26,6 +24,28 @@ class IssueListingScreen extends Component {
     gotoIssueDetail(item) {
         console.log(item);
         navigateTo('IssueDetail', {item});
+    }
+
+    renderScreenHeader(){
+        const { name, owner } = this.props.navigation.state.params.item;
+        console.log("name:"+name+", "+owner)
+        return (
+            <View style={styles.viewStyle}>
+                <Text style={styles.titleStyle}>
+                    {'Issues'}
+                </Text>
+                <Text style={styles.repoNameStyle}>
+                    {'"'+name+ '"'}
+                <Text style={styles.byStyle}>
+                    {' by '}
+                <Text style={styles.ownerNameStyle}>
+                    {owner.login}
+                </Text>
+                </Text>
+                </Text>
+                
+            </View>
+        );
     }
 
     renderRow(item) {
@@ -59,6 +79,9 @@ class IssueListingScreen extends Component {
             <View>
                 <Card>
                     <CardSection>
+                        {this.renderScreenHeader()}
+                    </CardSection>
+                    <CardSection>
                         {this.renderIssueList()}
                     </CardSection>
                 </Card>
@@ -66,6 +89,32 @@ class IssueListingScreen extends Component {
         );
     }
 }
+
+const styles = {
+    titleStyle: {
+        fontSize: 25,
+        color: '#000000',
+        fontWeight: 'bold',
+        paddingLeft: 15
+    },
+    repoNameStyle: {
+        fontSize: 23,
+        paddingLeft: 15
+    },
+    byStyle: {
+        fontStyle: 'italic',
+        fontSize: 23,
+    },
+    ownerNameStyle: {
+        fontSize: 23,
+        fontStyle: 'italic',
+        fontWeight: 'bold'
+    },
+    viewStyle: {
+        flex: 1,
+        flexDirection: 'column',
+    }
+};
 
 const mapStateToProps = state => ({
     ...state.auth,

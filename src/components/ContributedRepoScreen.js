@@ -11,6 +11,15 @@ class ContributedRepoScreen extends Component {
     componentDidMount() {
         this.props.fetchMyRepos();
     }
+    renderScreenHeader(){
+        return (
+            <View style={styles.viewStyle}>
+                <Text style={styles.titleStyle}>
+                    {this.props.githubDisplayName+"'s Contributions"}
+                </Text>
+            </View>
+        );
+    }
     renderRow(item) {
         return <ContributredListItem
             item={item}
@@ -50,6 +59,9 @@ class ContributedRepoScreen extends Component {
             <View>
                 <Card>
                     <CardSection>
+                        {this.renderScreenHeader()}
+                    </CardSection>
+                    <CardSection>
                         {this.renderContributedRepoList()}
                     </CardSection>
                 </Card>
@@ -58,6 +70,21 @@ class ContributedRepoScreen extends Component {
         );
     }
 }
+
+const styles = {
+    titleStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        fontSize: 25,
+        color: '#000000',
+        fontWeight: 'bold',
+        paddingLeft: 15
+    },
+    viewStyle: {
+        flex: 1,
+        flexDirection: 'row',
+    }
+};
 
 const mapStateToProps = state => ({
     ...state.auth,

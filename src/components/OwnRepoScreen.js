@@ -13,6 +13,16 @@ class OwnRepoScreen extends Component {
         this.props.fetchMyRepos();
     }
 
+    renderScreenHeader(){
+        return (
+            <View style={styles.viewStyle}>
+                <Text style={styles.titleStyle}>
+                    {this.props.githubDisplayName+"'s Repositories"}
+                </Text>
+            </View>
+        );
+    }
+
     renderRow(item) {
         return <ListItem 
                 item={item}
@@ -57,6 +67,9 @@ class OwnRepoScreen extends Component {
             <View>
                 <Card>
                     <CardSection>
+                        {this.renderScreenHeader()}
+                    </CardSection>
+                    <CardSection>
                         {this.renderOwnRepoList()}
                     </CardSection>
                 </Card>
@@ -65,6 +78,21 @@ class OwnRepoScreen extends Component {
         );
     }
 }
+
+const styles = {
+    titleStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        fontSize: 25,
+        color: '#000000',
+        fontWeight: 'bold',
+        paddingLeft: 15
+    },
+    viewStyle: {
+        flex: 1,
+        flexDirection: 'row',
+    }
+};
 
 const mapStateToProps = state => ({
     ...state.auth
