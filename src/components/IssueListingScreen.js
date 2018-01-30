@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {FlatList, View, Text} from 'react-native';
+import {FlatList, View, Text, Dimensions} from 'react-native';
 
 import {connect} from 'react-redux';
 
@@ -8,9 +8,14 @@ import {getRepoIssues} from '../actions';
 import {getIssuesDetail} from '../actions';
 import {IssueListItem} from "./common/list.issues";
 import {navigateTo, navigationResetTo} from "../GlobalNavigator";
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
+var scrollPadding = Dimensions.get('window').height - getStatusBarHeight() - 20 - 64;
 
 class IssueListingScreen extends Component {
+    state = {
+        headerHeight: 0
+    }
 
     componentDidMount() {
         let url = this.props.navigation.state.params.item.issues_url.split('{')[0];
@@ -30,7 +35,7 @@ class IssueListingScreen extends Component {
         const { name, owner } = this.props.navigation.state.params.item;
         console.log("name:"+name+", "+owner)
         return (
-            <View style={styles.viewStyle}>
+            <View style={styles.viewStyle} onLayout={(event) => { console.log('y: ', event.nativeEvent.layout.y); console.log('height: ', event.nativeEvent.layout.height); this.setState({ headerHeight: event.nativeEvent.layout.y + event.nativeEvent.layout.height}); }}>
                 <Text style={styles.titleStyle}>
                     {'Issues'}
                 </Text>
@@ -59,7 +64,9 @@ class IssueListingScreen extends Component {
             return <Spinner size='large' />;
         }
         return (
-            <FlatList
+            <FlatList 
+                style={{height: scrollPadding - this.state.headerHeight}}
+                onScroll={() => console.log("scrolling")}
                 data={this.props.allRepoIssues}
                 renderItem={({item}) => this.renderRow(item)}
                 keyExtractor={item => item.id}
@@ -122,9 +129,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchMyIssues: (url) =>
-        dispatch(getRepoIssues(url)),
-    fetchIssueDetails: (url) =>
-      dispatch(getIssuesDetail(url))
+        dispatch(getRepoIssues(url))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(IssueListingScreen);
