@@ -10,18 +10,20 @@ import IssueDetailsScreen from './components/IssueDetail'
 
 
 const RepoScreen = TabNavigator({
-  OwnRepo: {
+  OwnRepositories: {
     screen: OwnRepoScreen,
     navigationOptions: {
       headerRight: <LogoutComponent />,
-      headerTitle: 'My Repos'
+      headerTitle: 'My Repos',
+      title: 'Own Repositories'
     }
   },
   Contributions: {
     screen: ContributedRepoScreen,
     navigationOptions: {
       headerRight: <LogoutComponent />,
-      headerTitle: 'My Contributions'
+      headerTitle: 'My Contributions',
+      title: 'Contributions'
     }
   },
 });

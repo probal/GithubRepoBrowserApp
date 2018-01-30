@@ -31,7 +31,7 @@ export const loginWithGithub = () => {
         dispatch({
             type: LOGIN_USER
         });
-        manager.authorize('github', { scopes: 'user,repo' })
+        manager.authorize('github', { scopes: 'user' })
             .then(resp => loginUserSuccess(dispatch, resp))
             .catch(err => loginUserFail(dispatch, err));
     };
@@ -68,7 +68,7 @@ export const logoutFromGithub = () => {
                     payload: resp.data
                 });
                 // Fixme, destroy manager on logout
-                //manager = OauthManagerService.sharedInstance.destroyManager();
+                // manager = OauthManagerService.sharedInstance.destroyManager();
                 navigationResetTo('Login');
             })
             .catch(function (resp) {
