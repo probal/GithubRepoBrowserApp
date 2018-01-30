@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {FlatList, View, Text, Dimensions} from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import {connect} from 'react-redux';
 
@@ -8,7 +9,7 @@ import {getRepoIssues} from '../actions';
 import {getIssuesDetail} from '../actions';
 import {IssueListItem} from "./common/list.issues";
 import {navigateTo, navigationResetTo} from "../GlobalNavigator";
-import { getStatusBarHeight } from 'react-native-status-bar-height';
+
 
 var scrollPadding = Dimensions.get('window').height - getStatusBarHeight() - 20 - 64;
 

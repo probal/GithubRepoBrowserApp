@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {FlatList, View, Text} from 'react-native';
+import {FlatList, View, Text, Dimensions} from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import {connect} from 'react-redux';
 
@@ -9,7 +10,14 @@ import {getIssuesDetail} from '../actions';
 import {IssueDetailItem} from "./common/list.detail";
 import Moment from 'moment';
 
+var scrollPadding = Dimensions.get('window').height - getStatusBarHeight() - 20 - 64;
+
 class IssueDetailsScreen extends Component {
+
+    state = {
+        headerHeight: 0,
+        descriptionHeight: 0
+    }
 
     componentDidMount() {
         let url = this.props.navigation.state.params.item.comments_url
@@ -29,7 +37,7 @@ class IssueDetailsScreen extends Component {
         let item = this.props.navigation.state.params.item
         let issueDisplayName = "Issue #" + item.number + " " + item.title
         return (
-            <View style={styles.viewStyle}>
+            <View style={styles.viewStyle} onLayout={(event) => { this.setState({ headerHeight: event.nativeEvent.layout.y + event.nativeEvent.layout.height}); }}>
                 <Text style={styles.titleStyle}>
                     {issueDisplayName}
                 </Text>
@@ -45,7 +53,7 @@ class IssueDetailsScreen extends Component {
             return null;
         }
         return (
-            <View>
+            <View onLayout={(event) => { this.setState({ descriptionHeight: 5 + event.nativeEvent.layout.height}); }}>
                 <CardSection>
                     <View style={styles.bodyViewStyle}>
                         <Text style={styles.bodyTextStyle}>
@@ -73,6 +81,7 @@ class IssueDetailsScreen extends Component {
         }
         return (
             <FlatList
+                style={{height: scrollPadding - this.state.headerHeight - this.state.descriptionHeight}}
                 data={this.props.issueDetail}
                 renderItem={({item}) => this.renderRow(item)}
                 keyExtractor={item => item.id}
