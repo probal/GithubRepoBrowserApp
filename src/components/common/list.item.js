@@ -1,13 +1,32 @@
 import React, { Component } from 'react';
 import { Text, View, TouchableWithoutFeedback, Alert } from 'react-native';
-import  {CardSection}  from '../common';
+import { CardSection } from '../common';
+import OauthManagerSingleton from '../../OauthManagerSingleton'
+const manager = OauthManagerSingleton.sharedInstance.getManager();
+
 
 class ListItem extends Component {
-
+    state = {
+        languages: ''
+    };
     gotoItemDetail() {
         this.props.gotoItemDetail(this.props.item)
     }
-
+    getRepoLanguages() {
+        manager.makeRequest('github', this.props.item.languages_url)
+            .then((resp) => {
+                if (!resp.data) {
+                    return;
+                }
+                this.setState({
+                    languages: Object.keys(resp.data).join(', ')
+                });
+            })
+            .catch(err => console.log(err))
+    }
+    componentDidMount() {
+        this.getRepoLanguages();
+    }
     render() {
         const { id, name, language } = this.props.item;
 
@@ -20,7 +39,7 @@ class ListItem extends Component {
                                 {name}
                             </Text>
                             <Text style={styles.subTitleStyle}>
-                                {language}
+                                {this.state.languages}
                             </Text>
                         </View>
                     </CardSection>

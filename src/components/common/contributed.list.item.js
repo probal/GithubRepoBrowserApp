@@ -7,24 +7,41 @@ const manager = OauthManagerSingleton.sharedInstance.getManager();
 class ContributredListItem extends Component {
     state = {
         numerOfCommits: 0,
+        languages:''
     };
     gotoItemDetail() {
         this.props.gotoItemDetail(this.props.item)
     }
-    componentDidMount() {
+    getNumberOfCommits() {
         manager.makeRequest('github', `/repos/${this.props.item.owner.login}/${this.props.item.name}/stats/contributors`)
+            .then((resp) => {
+                if (!(resp && resp.data)) {
+                    return false;
+                }
+                let commits = resp.data.filter(item => item.author.login === this.props.githubLoginName);
+                if (commits.length) {
+                    this.setState({
+                        numerOfCommits: commits[0].total
+                    });
+                }
+            })
+            .catch(err => console.log(err))
+    }
+    getRepoLanguages() {
+        manager.makeRequest('github',this.props.item.languages_url)
         .then((resp) => {
-            if(!(resp && resp.data)){
-                return false;
+            if(!resp.data){
+                return;
             }
-            let commits = resp.data.filter(item => item.author.login === this.props.githubLoginName);
-            if(commits.length){
-                this.setState({
-                    numerOfCommits: commits[0].total
-                });
-            }
+            this.setState({
+                languages: Object.keys( resp.data ).join(', ')
+            });
         })
         .catch(err => console.log(err))
+    }
+    componentDidMount() {
+        this.getNumberOfCommits();
+        this.getRepoLanguages();
     }
     render() {
         const { id, name, language, owner } = this.props.item;
@@ -44,7 +61,7 @@ class ContributredListItem extends Component {
                                 </Text>
                             </Text>
                             <Text style={styles.subTitleStyle}>
-                                {language}
+                                {this.state.languages}
                             </Text>
                         </View>
                         <View style={styles.commitViewStyle}>
