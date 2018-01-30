@@ -31,7 +31,7 @@ export const loginWithGithub = () => {
         dispatch({
             type: LOGIN_USER
         });
-        manager.authorize('github', { scopes: 'user' })
+        manager.authorize('github', { scopes: 'user,repo' })
             .then(resp => loginUserSuccess(dispatch, resp))
             .catch(err => loginUserFail(dispatch, err));
     };
