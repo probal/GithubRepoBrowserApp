@@ -23,15 +23,42 @@ class LogoutComponent extends Component {
         } = this.props;
 
         return (
-            <View>
-                <Text>{githubDisplayName} | </Text>
-                <Text onPress={this.logoutButtonPressed.bind(this)}>Log Out</Text>
+            <View style={styles.informationViewStyle}>
+                <Text style={styles.nameTextStyle}>
+                {githubDisplayName} | </Text>
+                <Text style={styles.logOutTitleStyle} onPress={this.logoutButtonPressed.bind(this)}>
+                    Log Out
+                </Text>
             </View>
         );
     }
 
   };
  
+  const styles = {
+    bodyTextStyle: {
+        
+    },
+    nameTextStyle: {        
+        flexDirection: 'column',
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: '#000000',
+        paddingLeft: 10,
+        paddingTop: 20
+    },
+    logOutTitleStyle: {
+        color: '#000000',
+        fontSize: 15,
+        paddingRight: 10,
+        paddingTop: 20
+    },
+    informationViewStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    }
+};
   
 const mapStateToProps = state => ({
     ...state.auth

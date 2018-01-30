@@ -14,7 +14,7 @@ const RepoScreen = TabNavigator({
     screen: OwnRepoScreen,
     navigationOptions: {
       headerRight: <LogoutComponent />,
-      headerTitle: 'My Repos',
+      headerTitle: '',
       title: 'Own Repositories'
     }
   },
@@ -22,7 +22,7 @@ const RepoScreen = TabNavigator({
     screen: ContributedRepoScreen,
     navigationOptions: {
       headerRight: <LogoutComponent />,
-      headerTitle: 'My Contributions',
+      headerTitle: '',
       title: 'Contributions'
     }
   },
@@ -42,14 +42,14 @@ const RootNavigator = StackNavigator({
     screen: IssueListingScreen,
     navigationOptions: {
         headerRight: <LogoutComponent />,
-        headerTitle: 'Issue List'
+        headerTitle: ''
     }
   },
   IssueDetail: {
     screen: IssueDetailsScreen,
     navigationOptions: {
         headerRight: <LogoutComponent />,
-        headerTitle: 'Issue Detail'
+        headerTitle: ''
     }
   }
 });
