@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Alert, Text} from 'react-native';
+import {View, Alert, Text, TouchableOpacity, Image} from 'react-native';
 
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
@@ -19,7 +19,14 @@ class LoginScreen extends Component {
             return <Spinner size='large' />;
         }
         return (
-            <Button onPress={this.githubLoginButtonPressed.bind(this)}>Login with Github</Button>
+            <View style={styles.container}>
+                <TouchableOpacity style={styles.button} onPress={this.githubLoginButtonPressed.bind(this)}>
+                <Image source={require("../assets/iconGitHub.png")}/>
+                </TouchableOpacity>
+                <Text style={styles.text}>
+                    {'Login with Github'}
+                </Text>
+            </View>
         );
     }
 
@@ -33,6 +40,7 @@ class LoginScreen extends Component {
           } = this.props;
 
         return (
+            // this.renderLoginButton()
             <Card>
                 <CardSection>
                     {this.renderLoginButton()}
@@ -41,6 +49,25 @@ class LoginScreen extends Component {
         );
     }
 }
+
+const styles = {
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexDirection: 'row'
+    },
+    button: {
+      padding: 10,
+      shadowOffset: { width: 0, height: 5 },
+      shadowRadius: 10,
+      shadowOpacity: 0.35
+    },
+    text: {
+        fontSize: 20,
+      }
+  };
 
 const mapStateToProps = state => ({
     ...state.auth,
