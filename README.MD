@@ -30,4 +30,4 @@ Probal Sikder ([@probal](https://github.com/probal))
 Demo
 ------------
 
-![](https://media.giphy.com/media/l4pT2F7vhAHZJhy0g/giphy.gif)
+[![Github Repo](https://img.youtube.com/vi/nfDF8dLWIcs/0.jpg)](https://www.youtube.com/watch?v=nfDF8dLWIcs)
