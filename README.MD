@@ -3,6 +3,13 @@ Github Repo and Issue Browser
 
 A mobile application built on top of React Native framework [@ReactNative](https://facebook.github.io/react-native/), react-navigation [@link](https://reactnavigation.org/) and redux [@link](https://redux.js.org/) to browse github accounts. It uses [@react-native-oauth](https://github.com/fullstackreact/react-native-oauth) third party oauth library to establish oauth communication to github. You can browse your own repositories as well as your contributed reposotories. You can look up to issue list of your repositories and hence dive down to issue details.
 
+Thirdparty Integration
+======================
+
+After installing all the packages, For react-native-oauth android set up:
+
+replace the src folder in this location "node_modules/react-native-oauth/android/src" with the one decompressed from "AndroidSrc-Oauth.zip" available in the root folder.
+
 Contributors
 ------------
 

@@ -22,10 +22,10 @@ class LoginScreen extends Component {
             <View style={styles.container}>
                 <TouchableOpacity style={styles.button} onPress={this.githubLoginButtonPressed.bind(this)}>
                 <Image source={require("../assets/iconGitHub.png")}/>
-                </TouchableOpacity>
                 <Text style={styles.text}>
                     {'Login with Github'}
                 </Text>
+                </TouchableOpacity>
             </View>
         );
     }
@@ -55,10 +55,13 @@ const styles = {
       flex: 1,
       backgroundColor: '#fff',
       alignItems: 'center',
-      justifyContent: 'center',
-      flexDirection: 'row'
+      justifyContent: 'center'
+    //   flexDirection: 'row'
     },
     button: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
       padding: 10,
       shadowOffset: { width: 0, height: 5 },
       shadowRadius: 10,
