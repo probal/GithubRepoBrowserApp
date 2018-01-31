@@ -34,7 +34,7 @@ class IssueListingScreen extends Component {
     renderScreenHeader(){
         const { name, owner } = this.props.navigation.state.params.item;
         return (
-            <View style={styles.viewStyle} onLayout={(event) => {this.setState({ headerHeight: event.nativeEvent.layout.y + event.nativeEvent.layout.height}); }}>
+            <View style={styles.viewStyle} onLayout={(event) => { this.setState({ headerHeight: event.nativeEvent.layout.y + event.nativeEvent.layout.height}); }}>
                 <Text style={styles.titleStyle}>
                     {'Issues'}
                 </Text>

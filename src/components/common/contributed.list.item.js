@@ -39,7 +39,7 @@ class ContributredListItem extends Component {
         })
         .catch()
     }
-    componentDidMount() {
+    componentWillMount() {
         this.getNumberOfCommits();
         this.getRepoLanguages();
     }

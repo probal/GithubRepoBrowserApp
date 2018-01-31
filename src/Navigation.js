@@ -26,6 +26,9 @@ const RepoScreen = TabNavigator({
       title: 'Contributions'
     }
   },
+}, {
+  tabBarPosition: 'bottom',
+  animationEnabled: true,
 });
 
 const RootNavigator = StackNavigator({
