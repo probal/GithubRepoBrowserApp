@@ -7,13 +7,20 @@ Contributors
 ------------
 
 Ashif Iqbal ([@ashif-cefalo](https://github.com/ashif-cefalo))
- -- Issue detail, IOS setup, Listing bug fixes, momentjs stuffs etc.
+ -- Issue detail, IOS setup, General listing bug fix, momentjs stuffs, styling etc.
 
 Mehdi Hasan ([@mehdihasan](https://github.com/mehdihasan))
- -- Issue list, Andriod APK release etc.
+ -- Issue list, styling, Andriod APK release etc.
 
 Shovan Paul ([@PaulShovan](https://github.com/PaulShovan))
  -- Own and contributed repository listing, styling etc.
 
 Probal Sikder ([@probal](https://github.com/probal))
  -- Redux store, React navigations, Github oauth etc.
+ 
+
+
+Demo
+------------
+
+![](https://media.giphy.com/media/l4pT2F7vhAHZJhy0g/giphy.gif)
