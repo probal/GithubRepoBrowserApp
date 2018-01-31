@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
-import { FlatList, View, Alert, Text } from 'react-native';
+import { FlatList, View, Alert, Text, Dimensions } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
 import { connect } from 'react-redux';
 import { Spinner, ContributredListItem, Button, Card, CardSection } from './common';
 import { getMyRepos } from '../actions';
 import {navigateTo, navigationResetTo} from "../GlobalNavigator";
 
+var scrollPadding = Dimensions.get('window').height - getStatusBarHeight() - 20 - 64;
 class ContributedRepoScreen extends Component {
+
+    state = {
+        headerHeight: 0
+    }
 
     componentDidMount() {
         this.props.fetchMyRepos();
     }
     renderScreenHeader(){
         return (
-            <View style={styles.viewStyle}>
+            <View style={styles.viewStyle} onLayout={(event) => { this.setState({ headerHeight: 10 + event.nativeEvent.layout.height}); }}>
                 <Text style={styles.titleStyle}>
                     {this.props.githubDisplayName+"'s Contributions"}
                 </Text>
@@ -39,6 +45,7 @@ class ContributedRepoScreen extends Component {
         }
         return (
             <FlatList
+                style={{height: scrollPadding - this.state.headerHeight - 50}}
                 data={this.props.allRepos.filter(this.filterContributedRepo, this)}
                 renderItem={({ item }) => this.renderRow(item)}
                 keyExtractor={item => item.id}
