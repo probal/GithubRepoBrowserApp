@@ -9,7 +9,6 @@ export default class OauthManagerSingleton {
 
     getManager() {
         if (Platform.OS === 'ios'){
-            console.log("iOS")
             const config =  {
                 github: {
                     client_id: 'd1ca111fc45bae612c58',

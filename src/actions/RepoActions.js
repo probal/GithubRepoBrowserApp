@@ -9,11 +9,9 @@ export const getMyRepos = (githubOauthManager) => {
     return (dispatch) => {
         dispatch({ type: FETCH_OWN_REPO });
         githubOauthManager.makeRequest('github', '/user/repos')
-            .then(resp => 
-                console.log(resp)
+            .then(
             )
-            .catch(err => 
-                console.log(err)
+            .catch(
             );
     };
 };

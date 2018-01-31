@@ -22,7 +22,7 @@ class ListItem extends Component {
                     languages: Object.keys(resp.data).join(', ')
                 });
             })
-            .catch(err => console.log(err))
+            .catch()
     }
     componentDidMount() {
         this.getRepoLanguages();

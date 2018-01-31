@@ -28,15 +28,13 @@ class IssueListingScreen extends Component {
     }
 
     gotoIssueDetail(item) {
-        console.log(item);
         navigateTo('IssueDetail', {item});
     }
 
     renderScreenHeader(){
         const { name, owner } = this.props.navigation.state.params.item;
-        console.log("name:"+name+", "+owner)
         return (
-            <View style={styles.viewStyle} onLayout={(event) => { console.log('y: ', event.nativeEvent.layout.y); console.log('height: ', event.nativeEvent.layout.height); this.setState({ headerHeight: event.nativeEvent.layout.y + event.nativeEvent.layout.height}); }}>
+            <View style={styles.viewStyle} onLayout={(event) => {this.setState({ headerHeight: event.nativeEvent.layout.y + event.nativeEvent.layout.height}); }}>
                 <Text style={styles.titleStyle}>
                     {'Issues'}
                 </Text>
@@ -67,7 +65,6 @@ class IssueListingScreen extends Component {
         return (
             <FlatList 
                 style={{height: scrollPadding - this.state.headerHeight}}
-                onScroll={() => console.log("scrolling")}
                 data={this.props.allRepoIssues}
                 renderItem={({item}) => this.renderRow(item)}
                 keyExtractor={item => item.id}

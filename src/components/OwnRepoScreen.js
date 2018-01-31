@@ -32,7 +32,6 @@ class OwnRepoScreen extends Component {
         return item.owner.login == this.props.githubLoginName;
     }
     gotoItemDetail(item) {
-        console.log(item);
         navigateTo('Issue', {item});
     }
 
@@ -46,7 +45,6 @@ class OwnRepoScreen extends Component {
         }
         return (
             <FlatList
-                onScroll={() => console.log("scrolling own repo")}
                 data={this.props.allRepos.filter(this.filterOwnRepo, this)}
                 renderItem={({item}) => this.renderRow(item)}
                 keyExtractor={item => item.id}
