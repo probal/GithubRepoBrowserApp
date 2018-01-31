@@ -23,7 +23,7 @@ class LoginScreen extends Component {
                 <TouchableOpacity style={styles.button} onPress={this.githubLoginButtonPressed.bind(this)}>
                 <Image source={require("../assets/iconGitHub.png")}/>
                 <Text style={styles.text}>
-                    {'Login with Github'}
+                    {'  Login with Github'}
                 </Text>
                 </TouchableOpacity>
             </View>
@@ -68,7 +68,7 @@ const styles = {
       shadowOpacity: 0.35
     },
     text: {
-        fontSize: 20,
+        fontSize: 25,
       }
   };
 
