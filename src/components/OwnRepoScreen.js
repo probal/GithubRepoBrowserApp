@@ -38,7 +38,6 @@ class OwnRepoScreen extends Component {
         return item.owner.login == this.props.githubLoginName;
     }
     gotoItemDetail(item) {
-        console.log(item);
         navigateTo('Issue', {item});
     }
 

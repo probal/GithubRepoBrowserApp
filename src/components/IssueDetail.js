@@ -21,7 +21,6 @@ class IssueDetailsScreen extends Component {
 
     componentDidMount() {
         let url = this.props.navigation.state.params.item.comments_url
-        console.log("detailsURL: " + url);
         this.props.fetchIssueDetails(url);
     }
 

@@ -25,7 +25,7 @@ class ContributredListItem extends Component {
                     });
                 }
             })
-            .catch(err => console.log(err))
+            .catch()
     }
     getRepoLanguages() {
         manager.makeRequest('github',this.props.item.languages_url)
@@ -37,9 +37,9 @@ class ContributredListItem extends Component {
                 languages: Object.keys( resp.data ).join(', ')
             });
         })
-        .catch(err => console.log(err))
+        .catch()
     }
-    componentDidMount() {
+    componentWillMount() {
         this.getNumberOfCommits();
         this.getRepoLanguages();
     }

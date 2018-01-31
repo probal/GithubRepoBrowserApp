@@ -1,2 +1,19 @@
-export ANDROID_HOME=/Users/probal/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+Github Repo and Issue Browser
+=============================
+
+A mobile application built on top of React Native framework [@ReactNative](https://facebook.github.io/react-native/), react-navigation [@link](https://reactnavigation.org/) and redux [@link](https://redux.js.org/) to browse github accounts. It uses [@react-native-oauth](https://github.com/fullstackreact/react-native-oauth) third party oauth library to establish oauth communication to github. You can browse your own repositories as well as your contributed reposotories. You can look up to issue list of your repositories and hence dive down to issue details.
+
+Contributors
+------------
+
+Ashif Iqbal ([@ashif-cefalo](https://github.com/ashif-cefalo))
+ -- Issue detail, IOS setup, Listing bug fixes, momentjs stuffs etc.
+
+Mehdi Hasan ([@mehdihasan](https://github.com/mehdihasan))
+ -- Issue list, Andriod APK release etc.
+
+Shovan Paul ([@PaulShovan](https://github.com/PaulShovan))
+ -- Own and contributed repository listing, styling etc.
+
+Probal Sikder ([@probal](https://github.com/probal))
+ -- Redux store, React navigations, Github oauth etc.

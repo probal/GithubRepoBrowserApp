@@ -28,13 +28,11 @@ class IssueListingScreen extends Component {
     }
 
     gotoIssueDetail(item) {
-        console.log(item);
         navigateTo('IssueDetail', {item});
     }
 
     renderScreenHeader(){
         const { name, owner } = this.props.navigation.state.params.item;
-        console.log("name:"+name+", "+owner)
         return (
             <View style={styles.viewStyle} onLayout={(event) => { this.setState({ headerHeight: event.nativeEvent.layout.y + event.nativeEvent.layout.height}); }}>
                 <Text style={styles.titleStyle}>

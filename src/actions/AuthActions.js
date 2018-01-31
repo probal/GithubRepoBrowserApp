@@ -38,22 +38,19 @@ export const loginWithGithub = () => {
 };
 
 const loginUserFail = (dispatch, err) => {
-    console.log(err);
     dispatch({ type: LOGIN_USER_FAIL });
 };
 
 const loginUserSuccess = (dispatch, resp) => {
-    console.log(resp);
     manager.makeRequest('github', '/user')
         .then(function (resp) {
             dispatch({
                 type: LOGIN_USER_SUCCESS,
                 payload: resp.data
             });
-            console.log(resp);
             navigationResetTo('Repo');
         })
-        .catch(err => console.log(err))
+        .catch()
 };
 
 export const logoutFromGithub = () => {
@@ -86,7 +83,6 @@ export const getMyRepos = () => {
         });
         manager.makeRequest('github', '/user/repos')
             .then(function (resp) {
-                console.log(resp);
                 dispatch({
                     type: FETCH_REPO_SUCCESS,
                     payload: resp.data
@@ -105,7 +101,6 @@ export const getRepoIssues = (repoIssueUrl) => {
         dispatch({ type: FETCH_REPO_ISSUES });
         manager.makeRequest('github', repoIssueUrl)
             .then(function(resp) {
-                console.log(resp);
                 dispatch({
                     type: FETCH_ISSUES_SUCCESS,
                     payload: resp.data
@@ -113,7 +108,6 @@ export const getRepoIssues = (repoIssueUrl) => {
                 // navigateTo('Issue');
             })
             .catch(function(err) {
-                console.log(err);
                 dispatch({
                     type: FETCH_ISSUES_FAIL
                 });
@@ -126,7 +120,6 @@ export const getIssuesDetail = (issueDetailUrl) => {
         dispatch({ type: FETCH_ISSUE_DETAIL });
         manager.makeRequest('github', issueDetailUrl)
             .then(function(resp) {
-                console.log(resp);
                 dispatch({
                     type: FETCH_ISSUE_DETAIL_SUCCESS,
                     payload: resp.data
@@ -134,7 +127,6 @@ export const getIssuesDetail = (issueDetailUrl) => {
                 // navigateTo('IssueDetail');
             })
             .catch(function(err) {
-                console.log(err);
                 dispatch({
                     type: FETCH_ISSUE_DETAIL_FAIL
                 });

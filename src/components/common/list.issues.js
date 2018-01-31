@@ -12,7 +12,6 @@ class IssueListItem extends Component {
     getTimeDifference(aDate){
         var a = Moment(aDate);
         var b = Moment();
-        // console.log('aDate: '+aDate+' a: '+a+' bDate: '+b);
         
         var years = b.diff(a, 'years');
         var months = b.diff(a, 'months');
@@ -20,7 +19,6 @@ class IssueListItem extends Component {
         var hours = b.diff(a, 'hours');
         var minutes = b.diff(a, 'minutes');
 
-        // console.log('days: '+days+' hours: '+hours+' minutes: '+minutes);
 
         var result = '';
         if (years>0){
